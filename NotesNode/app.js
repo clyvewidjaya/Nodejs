@@ -6,8 +6,10 @@ const fs = require('fs'); //const is like val in scala. we normally use var, con
 
 const os = require('os'); //this case we need os.
 const notes = require('./notes.js');
+const _ = require('lodash');
 
-//require is used to load in modules example from nodejs.org/api or other files or import packages
+//require is used to load in modules example from nodejs.org/api or other files or import packages from like
+//npmjs.com
 //something like import in java.
 
 //fs.appendFile('greetings.txt','Hello World');
@@ -41,3 +43,9 @@ console.log(res);
 
 var sum = notes.add(1,2);
 console.log(sum);
+
+//use some utilites example of lodash
+console.log(_.isString('123')); //true
+
+var filteredArray = _.uniq(['Clyve',1,'Clyve',1,2,3,4]);
+console.log(filteredArray);
