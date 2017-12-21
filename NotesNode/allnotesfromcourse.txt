@@ -49,3 +49,7 @@ console.log(_.isString('123')); //true
 
 var filteredArray = _.uniq(['Clyve',1,'Clyve',1,2,3,4]);
 console.log(filteredArray);
+
+to make package.json of your file
+go to the directory of the file
+then type npm init. then fill out 
