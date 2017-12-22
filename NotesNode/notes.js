@@ -1,51 +1,94 @@
 //console.log('Starting notes.js');
 const fs = require('fs');
+const _ = require('lodash');
+const readline = require('readline');
 //console.log(module);
 //we can ofc store functions
+var fetchNotes = () => {
+  try {
+    var existNote = fs.readFileSync('notes-data.json');
+    return JSON.parse(existNote);
+  } catch(e) {
+    return [];
+  }
+};
+
+var saveNotes = (notes) => {
+  var sortedNotes = _.sortBy(notes, (notes) => notes.title);
+  fs.writeFileSync('notes-data.json',JSON.stringify(sortedNotes));
+};
+
 var addNote = (title, body) => {
-  //console.log('Adding note', title, body);
-  var notes = [];
+  var notes = fetchNotes();
   var theNote = {
     title,body
   };
 
-  try {
-    var existNote = fs.readFileSync('notes-data.json');
-    notes = JSON.parse(existNote);
-  } catch (e){
-
-  }
   var duplicateNotes = notes.filter((theNote) => theNote.title === title);
+
   if (duplicateNotes.length === 0){
     notes.push(theNote);
-    fs.writeFileSync('notes-data.json',JSON.stringify(notes));
-  } else {
-
+    saveNotes(notes);
+    return theNote;
   }
+};
 
+var editNote = (title) => {
+  var notes = fetchNotes();
+  var filtered = notes.filter((notes) => notes.title === title);
+  logNote(filtered[0]);
+  removeNote(title);
+  //var theTitle = filtered[0].title;
+  const r2 = readline.createInterface({input: process.stdin, output: process.stdout});
+  r2.question('Input new body => ', (body) => {
+    addNote(title, body);
+    console.log("Edited!");
+    r2.clearLine();
+    r2.close();
+  });
 };
 
 var getAll  = () => {
-  console.log('Adding all notes');
+  var notes = fetchNotes();
+  _.forEach(notes, (notes) => {
+    console.log(`Title: ${notes.title}`);
+    console.log(`Body: ${notes.body}\n`);
+  });
 };
 
 var removeNote = (title) => {
-  console.log('Remove note');
+  var notes = fetchNotes();
+  var newNote = notes.filter((notes) => notes.title !== title);
+  saveNotes(newNote);
+  return notes.length !== newNote.length;
 };
 
 var getNote = (title) => {
-  //console.log('Getting note ', title);
-  var theNote = fs.readFileSync('notes-data.json');
-  var noteInObject = JSON.parse(theNote);
-  console.log("Title: ", noteInObject.title);
-  console.log("Body: ", noteInObject.body);
+  var notes = fetchNotes();
+  /*
+  _.forEach(notes, (notes) => {
+    if (notes.title === title){
+      console.log(`Title: ${notes.title}`);
+      console.log(`Body: ${notes.body}`);
+    }
+  });
+  */ //another way to do it, this is your own way, below is videos
+  var filteredNotes = notes.filter((notes) => notes.title === title);
+  return filteredNotes[0];
+};
+
+var logNote = (note) => {
+  console.log(`Title: ${note.title}`);
+  console.log(`Body: ${note.body}`);
 };
 
 module.exports = {
   addNote,
+  editNote,
   getAll,
   getNote,
-  removeNote
+  removeNote,
+  logNote
 };
 //we need to export all the functions in order
 //for the function to be used.
