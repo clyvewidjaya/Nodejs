@@ -7,7 +7,23 @@ const readline = require('readline');
 const notes = require('./notes.js');
 
 //console.log(process.argv);
-const argv = yargs.argv;
+const titleOptions = {describe: 'Title of note', demand: true, alias: 't'};
+const bodyOptions = {describe: 'Note Body', demand: true, alias: 'b'};
+
+const argv = yargs
+  .command('add','Add a new note', {
+    title: titleOptions,
+    body: bodyOptions
+  })
+  .command('list', 'List all Notes')
+  .command('read', 'Read a note', {
+    title: titleOptions
+  })
+  .command('remove', 'Delete a note',{
+    title: titleOptions
+  })
+  .help()
+  .argv;
 var command = argv._[0];
 //this because the command (the add, list, etc), will be in
 //an array under then name of _ .

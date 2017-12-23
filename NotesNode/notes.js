@@ -50,10 +50,13 @@ var editNote = (title) => {
 
 var getAll  = () => {
   var notes = fetchNotes();
-  _.forEach(notes, (notes) => {
-    console.log(`Title: ${notes.title}`);
-    console.log(`Body: ${notes.body}\n`);
+  /*
+  _.forEach(notes, (clyve) => {
+    logNote(clyve);
   });
+  */
+  //or
+  notes.forEach((widjaya) => logNote(widjaya));
 };
 
 var removeNote = (title) => {
@@ -78,6 +81,7 @@ var getNote = (title) => {
 };
 
 var logNote = (note) => {
+  debugger;
   console.log(`Title: ${note.title}`);
   console.log(`Body: ${note.body}`);
 };
