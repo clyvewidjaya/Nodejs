@@ -22,6 +22,9 @@ const argv = yargs
   .command('remove', 'Delete a note',{
     title: titleOptions
   })
+  .command('edit', 'Edit a note', {
+    title:titleOptions
+  })
   .help()
   .argv;
 var command = argv._[0];
@@ -68,7 +71,7 @@ if (command === 'add'){
   var message = notes.removeNote(argv.title) ? 'Note Removed!' : 'Note not exists';
   console.log(message);
 } else if (command === 'edit'){
-
+  notes.editNote(argv.title);
 } else {
   console.log('Command not recognized');
 }
