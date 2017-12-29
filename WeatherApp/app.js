@@ -19,6 +19,7 @@ const argv = yargs
 //console.log(argv.address);
 //var encodedAddr = encodeURIComponent(argv.address);
 //console.log(argv);
+/*
 geocode.geocodeAddress(argv.address, (gerrorMessage, gResults) => {
   if (gerrorMessage){
     console.log(gerrorMessage);
@@ -30,9 +31,22 @@ geocode.geocodeAddress(argv.address, (gerrorMessage, gResults) => {
       } else {
         console.log(gResults.address);
         console.log(`It is currently ${wResults.temperature} Celcius, feels like ` +
-          `${wResults.apparentTemperature} Celcius. Weather summary: ${wResults.summary}`);
+          `${wResults.apparentTemperature} Celcius.\nWeather summary: ${wResults.summary}`);
       }
     });
   }
 });
+*/
+
+geocode.geocodeAddress(argv.address).then((location) => {
+  //console.log(JSON.stringify(location, undefined, 2));
+  return weather.getWeather(location);
+}).then((results) => {
+  console.log(results.address);
+  console.log(`It is currently ${results.temperature} Celcius, feels like ` +
+    `${results.apparentTemperature} Celcius.\nWeather summary: ${results.summary}`);
+}).catch((errorMessage) => {
+  console.log(errorMessage);
+});
+
 //https://api.darksky.net/forecast/9ea927a491a9c8e5e648c0bbbee2019a/37.8267,-122.4233

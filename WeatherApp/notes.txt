@@ -1,0 +1,8 @@
+added this line to bash_profile so I can run the app directly from terminal
+just by typing
+weather Address
+ex.
+weather Oshawa
+or
+Weather "Toronto Canada"
+alias weather="clear; node Desktop/Node\ UDEMY/WeatherApp/app-promise.js -a "$@""
