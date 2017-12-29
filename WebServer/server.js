@@ -19,6 +19,7 @@ app.use((req, res, next) => {
   next(); //we need next in order to continue the program.
 });
 
+//next is quite useful when you have like a maintenance thing.
 /*
 app.use((req,res,next) => {
   res.render('maintenance.hbs');
