@@ -5,4 +5,4 @@ ex.
 weather Oshawa
 or
 Weather "Toronto Canada"
-alias weather="clear; node Desktop/Node\ UDEMY/WeatherApp/app-promise.js -a "$@""
+alias weather="clear; node Desktop/Learn_node/WeatherApp/app-promise.js -a "$@""
