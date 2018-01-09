@@ -58,6 +58,12 @@ app.get('/bad', (req, res) => {
   });
 });
 
+app.get('/project',(req,res) => {
+  res.render('project.hbs',{
+    pageTitle: 'Personal Project'
+  });
+});
+
 app.listen(port,() => {
   console.log(`Port is up on ${port}`);
 });
