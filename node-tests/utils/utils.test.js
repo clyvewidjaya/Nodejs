@@ -42,6 +42,22 @@ it('Should set first and last names', () => {
     lastName: 'Widjaya'
   });
 });
+
+//mocha doesnt know that it is async function unless you give the 'done' argument
+//and dont forget to give done();
+it('Should async add 2 numbers', (done) => {
+  utils.asyncAdd(4, 3, (sum) => {
+    expect(sum).toBe(7).toBeA('number');
+    done();
+  });
+});
+
+it('Should async square 1 number', (done) => {
+  utils.asyncSquare(7, (sq) => {
+    expect(sq).toBe(49).toBeA('number');
+    done();
+  });
+});
 //nodemon for testing
 //nodemon --exec 'npm test'
 //or we just added test-watch in package.json
