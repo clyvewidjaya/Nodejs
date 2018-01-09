@@ -4,6 +4,28 @@
     <meta charset="UTF-8">
     <title>Home - Clyve's Website</title>
   </head>
+  <style>
+    header {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+    }
+
+    p a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 18px 25px;
+      text-decoration: underline;
+    }
+
+    p a:hover {
+      background-color: #111;
+    }
+  </style>
   <body>
     {{> header}}
     <p>{{screamIt welcomeMessage}}</p>
